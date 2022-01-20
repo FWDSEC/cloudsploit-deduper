@@ -35,8 +35,6 @@ def main():
                 continue
 
             resource_region = f"Resource: {row[cols.index('resource')]}\nRegion: {row[cols.index('region')]},\n\n"
-            
-            #issue['comment'] = row[cols.index('comment')]
 
             if row[cols.index('title')] not in issues:
                 issues[ row[ cols.index('title') ] ] = dict()
@@ -48,12 +46,15 @@ def main():
             
             issues[ row[ cols.index('title') ] ]['Resources and Regions'] += resource_region
             
-    with open(f'deduped-{path.basename( csv_file )}', 'w') as dd:
+    deduped_file = f'deduped-{path.basename( csv_file )}'
+    with open(deduped_file, 'w') as dd:
         dd.write( f"Category,Title,Description,Resources and Regions, Message,\n"  )
         for title in issues:
             for col in issues[title]:
                 dd.write( f'"{issues[title][col]}",'  )
             dd.write( "\n" )
+
+    print( f"Success! Deduped file: ./{deduped_file}" )
 
 
 main()
