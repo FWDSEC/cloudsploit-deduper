@@ -17,3 +17,12 @@ positional arguments:
 optional arguments:
   -h, --help       show this help message and exit
 ```
+
+## Example:
+```
+$ /path/to/cloudsploit/index.js --config cloudsploit-config.js --csv /path/to/cloudsploit-report.csv
+...
+$ ./cloudsploit-dedupe-csv.py /path/to/cloudsploit-report.csv
+$ open ./dedupe-cloudsploit-report.csv
+```
+
