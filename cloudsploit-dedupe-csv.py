@@ -67,7 +67,7 @@ def cloudsploit_guide( cat, title ):
     cat_f = cat.lower().replace( " ", "" )
     title_f = title.lower().replace( " ", "-" )
 
-    res = requests.get( f'https://raw.githubusercontent.com/aquasecurity/cloud-security-remediation-guides/master/en/azure/{cat_f}/{title_f}.md' )
+    res = requests.get( f'https://raw.githubusercontent.com/aquasecurity/cloud-security-remediation-guides/master/en/azure/{cat_f}/{title_f}.md', timeout=10 )
     
     if res.status_code != 200:
         return guide
