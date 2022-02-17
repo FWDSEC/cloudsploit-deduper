@@ -10,12 +10,12 @@ import re
 parser = argparse.ArgumentParser( description='Deduplicate CloudSploit report findings and filter for only FAILed issues. Does not delete or modify orignal file.' )
 parser.add_argument(
     'cloudsploit_csv',
-    help='File path to the CloudSploit CSV report file to be parsed.',
+    help='File path to the CloudSploit CSV report file to be parsed',
     type=pathlib.Path
 )
 parser.add_argument(
     '-o','--output_file',
-    help='File path to the resultant deduped CloudSploit CSV. If omitted the file will be in the current directory.',
+    help='File path to the resultant deduped CloudSploit CSV. If omitted the file will be written to ./deduped-{original_filename}.csv',
     type=pathlib.Path
 )
 
