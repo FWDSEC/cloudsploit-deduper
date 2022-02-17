@@ -13,6 +13,11 @@ parser.add_argument(
     help='File path to the CloudSploit CSV report file to be parsed.',
     type=pathlib.Path
 )
+parser.add_argument(
+    '-o','--output_file',
+    help='File path to the resultant deduped CloudSploit CSV. If omitted the file will be in the current directory.',
+    type=pathlib.Path
+)
 
 def main():
 
@@ -50,15 +55,20 @@ def main():
             
             issues[ row[ cols.index('title') ] ]['Resources and Regions'] += resource_region
             
-    deduped_file = f'deduped-{path.basename( csv_file )}'
+    deduped_file = f'deduped-{path.basename( csv_file )}' if args.output_file == None else args.output_file
     with open(deduped_file, 'w') as dd:
-        dd.write( f"Category,Title,Description,Resources and Regions, Message, More Info, Azure Link, Remediation\n"  )
+        dd.write( f"Category, Title, Description, Resources and Regions, Message, More Info, Azure Link, Remediation\n"  )
         for title in issues:
             for col in issues[title]:
-                dd.write( f'"{issues[title][col]}",'  )
+                record = issues[title][col]
+                if col == "AZURE Link":
+                    record = f'=HYPERLINK("{record}")'
+                else:
+                    record = f'"{record}"'
+                dd.write( record + "," )
             dd.write( "\n" )
 
-    print( f"Success! Deduped file: ./{deduped_file}" )
+    print( f"\nSuccess! Deduped file to ./{deduped_file}" )
 
 
 def cloudsploit_guide( cat, title ):
@@ -67,8 +77,12 @@ def cloudsploit_guide( cat, title ):
     cat_f = cat.lower().replace( " ", "" )
     title_f = title.lower().replace( " ", "-" )
 
+    print( f"\rFetching extra info for {title_f}", end="" )
+
     res = requests.get( f'https://raw.githubusercontent.com/aquasecurity/cloud-security-remediation-guides/master/en/azure/{cat_f}/{title_f}.md', timeout=10 )
     
+    print( f'\r{"Done": <100}', end="" )
+
     if res.status_code != 200:
         return guide
 
