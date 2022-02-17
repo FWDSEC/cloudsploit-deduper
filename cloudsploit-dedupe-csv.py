@@ -69,6 +69,7 @@ def main():
     workbook = xlsxwriter.Workbook( deduped_file )
     worksheet = workbook.add_worksheet()
     # Styling
+    worksheet.freeze_panes( 1, 0 )
     excel_formats = {
         "blank": workbook.add_format(),
         "url": workbook.get_default_url_format(),
