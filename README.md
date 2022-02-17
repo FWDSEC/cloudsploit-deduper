@@ -37,7 +37,7 @@ $ /path/to/cloudsploit/index.js --config cloudsploit-config.js --csv /path/to/cl
 **Basic**
 ```
 $ pipenv run cloudsploit-dedupe-csv.py /path/to/cloudsploit-report.csv
-$ open ./dedupe-cloudsploit-report.xlsx
+$ open ./deduped-cloudsploit-report.xlsx
 ```
 **Defining the output path**
 ```
