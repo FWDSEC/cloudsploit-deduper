@@ -62,7 +62,7 @@ def main():
             
             issues[ row[ cols.index('title') ] ]['Resources and Regions'] += resource_region
             
-    deduped_file = f'deduped-{os.path.basename( csv_file )}.xlsx' if args.output_file == None else args.output_file
+    deduped_file = f'deduped-{pathlib.Path( csv_file ).stem}.xlsx' if args.output_file == None else f'{args.output_file}.xlsx'
     headers = ("Category", "Title", "Description", "Resources and Regions", "Message", "More Info", "Azure Link", "Recommended Action")
     wrappables = ( headers[2], headers[4], headers[5], headers[7] )
     # Write XLSX
