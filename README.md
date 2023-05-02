@@ -44,4 +44,10 @@ $ open ./deduped-cloudsploit-report.xlsx
 $ pipenv run cloudsploit-dedupe-csv.py -o /path/to/output.xlsx /path/to/cloudsploit-report.csv
 $ open /path/to/output.xlsx
 ```
+**Multiple subscriptions and/or CSVs to join**
+```
+$ cat /path/to/cloudsploit-reports/*.csv > /path/to/joined-cloudsploit-reports.csv
+$ pipenv run cloudsploit-dedupe-csv.py -o /path/to/output.xlsx /path/to/joined-cloudsploit-reports.csv
+$ open /path/to/output.xlsx
+```
 

@@ -38,7 +38,7 @@ def main():
         is_header = True
         cols = []
         for row in report_reader:
-            if is_header:
+            if is_header or row[0] == 'category':
                 is_header = False
                 cols = list(map( lambda name: name.lower(), row))
                 continue
@@ -104,8 +104,8 @@ def main():
         row+=1
     workbook.close()
 
-    print( f"\nSuccess! Deduped file to ./{deduped_file}" )
-    os.system( f"open {deduped_file}" )
+    print( f"\nSuccess! Deduped file to {deduped_file}" )
+    #os.system( f"open {deduped_file}" )
 
 
 def cloudsploit_guide( cat, title ):
