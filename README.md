@@ -6,6 +6,8 @@ The CSV report from CloudSploit can be a bit unruly. The same issue is repeated 
 
 This script looks through each FAILed finding (because those are the ones we care about), and groups together the Regions and Resources into a single cell, so that each issue type is only listed once.
 
+As a bonus it also outputs to `*.xlsx`, *AND* pulls down extra information about each finding from AquaSec (Cloudsploit's devs) including remediation guidance and links to relevant Microsoft articles. Only the finding title is sent to fetch this data, and never any sensitive or identifying information.
+
 ## Requirements
 1. Python 3
 2. Pipenv (https://pipenv-fork.readthedocs.io/en/latest/)
